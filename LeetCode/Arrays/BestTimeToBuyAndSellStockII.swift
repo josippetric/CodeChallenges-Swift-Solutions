@@ -9,12 +9,20 @@
 import Foundation
 
 func maxProfit(_ prices: [Int]) -> Int {
-	var profit = 0
-	if prices.isEmpty {
-		return profit
+	if prices.isEmpty { return 0}
+	
+	var minPrice = prices[0]
+	var maxProfit = 0
+	
+	for price in prices {
+		if price < minPrice {
+			minPrice = price
+		}
+		
+		let currentProfit = price - minPrice
+		
+		if currentProfit > maxProfit {
+			maxProfit = currentProfit
+		}
 	}
-	for index in 1 ..< prices.count {
-		profit += max(0, prices[index] - prices[index - 1])
-	}
-	return profit
-}
+	return maxProfit}
